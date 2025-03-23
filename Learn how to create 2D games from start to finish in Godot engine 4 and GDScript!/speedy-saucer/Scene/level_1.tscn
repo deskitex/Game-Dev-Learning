@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cscrh6e2yqn8k"]
+
+[ext_resource type="Texture2D" uid="uid://cosyk82e3r8na" path="res://Asset/speedy_saucer_assets/purple.png" id="1_knl37"]
+[ext_resource type="PackedScene" uid="uid://ctifnhm2yf18v" path="res://Scene/player.tscn" id="2_fasp6"]
+[ext_resource type="PackedScene" uid="uid://cahqv8xyblthx" path="res://Scene/maze.tscn" id="3_8watv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xkvd4"]
+font_size = 40
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_fasp6")]
+z_index = 2
+position = Vector2(262, 217)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Maze" parent="." instance=ExtResource("3_8watv")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+z_index = -100
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_knl37")
+stretch_mode = 1
+
+[node name="Start" type="Label" parent="."]
+offset_left = 198.0
+offset_top = 89.0
+offset_right = 292.0
+offset_bottom = 144.0
+text = "Start"
+label_settings = SubResource("LabelSettings_xkvd4")
+
+[node name="Finish" type="Label" parent="."]
+offset_left = 96.0
+offset_top = -96.0
+offset_right = 190.0
+offset_bottom = -41.0
+text = "Finish"
+label_settings = SubResource("LabelSettings_xkvd4")
+
+[connection signal="body_exited" from="Maze" to="Player" method="_on_maze_body_exited"]
